@@ -16,10 +16,21 @@
             class LikeButton extends React.Component{
                 constructor(props){ // 
                     super(props);
+                    this.state = {
+                        liked: false //기본상태 세팅
+                    }; // 바뀔 여지가 있는 부분
                 }
                 
                 render(){ // 태그를 만들어주는 함수, 화면을 어떻게 보여줄 것인지
-                    return e('button', null, 'Like'); // <button>Like</button>을 만들겠다! 만드는게 아님.
+                    // return e('button', {onClick: () => {console.log('clicked')}, type:'submit'}, 'Like'); 
+                    //첫번째는 태그, 두번쨰는 속성을 객체형식으로 , 세번째는 내용이다.  
+                    // <button onclick: () => {console.log('clicked') }">Like</button> 
+
+                    return e('button', 
+                    {onClick: () => {this.setState({liked: true})}, type:'submit'}, 
+                    this.state.liked === true ? 'Liked' : 'Like',
+                    ); 
+                    // 기본 상태가 세팅되어있는것을 바꾼다. 
                 }
             }
         </script>
