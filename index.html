@@ -6,12 +6,12 @@
     <title>Document</title>
     <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
 </head>
 <body>
     <div id="root"></div> <!-- 결과: <div id="root"><button>Like</button></div> -->
-        <script>
-            const e = React.createElement;
+        <script type="text/babel"> // 자바스크립트 안에서 html태그를 넣을수있다. 
 
             class LikeButton extends React.Component{
                 constructor(props){ // 
@@ -22,20 +22,23 @@
                 }
                 
                 render(){ // 태그를 만들어주는 함수, 화면을 어떻게 보여줄 것인지
-                    // return e('button', {onClick: () => {console.log('clicked')}, type:'submit'}, 'Like'); 
-                    //첫번째는 태그, 두번쨰는 속성을 객체형식으로 , 세번째는 내용이다.  
-                    // <button onclick: () => {console.log('clicked') }">Like</button> 
 
-                    return e('button', 
-                    {onClick: () => {this.setState({liked: true})}, type:'submit'}, 
-                    this.state.liked === true ? 'Liked' : 'Like',
-                    ); 
+                    // return e('button', 
+                    // {onClick: () => {this.setState({liked: true})}, type:'submit'}, 
+                    // this.state.liked === true ? 'Liked' : 'Like',
+                    // ); 
                     // 기본 상태가 세팅되어있는것을 바꾼다. 
+
+                    return <button 
+                    type="submit" onClick={()=> {this.setState({ liked: true})}}>
+                    {this.state.liked === true ? 'Liked' : 'Like' }
+                    </button>;
+                    // JSX : 자바스크립트 + XML 
                 }
             }
         </script>
-        <script>
-            ReactDOM.render(e(LikeButton), document.querySelector('#root')); // 만들었던것을 그린다네
+        <script type="text/babel">
+            ReactDOM.render(<LikeButton />, document.querySelector('#root')); // 만들었던것을 그린다네
         </script>
     
     
